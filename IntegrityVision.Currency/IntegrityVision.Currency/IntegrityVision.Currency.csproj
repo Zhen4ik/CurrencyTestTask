@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Methods.cs" />
     <Compile Include="CurrencyHistory.cs" />
     <Compile Include="CurrnecyRecord.cs" />
     <Compile Include="Program.cs" />
