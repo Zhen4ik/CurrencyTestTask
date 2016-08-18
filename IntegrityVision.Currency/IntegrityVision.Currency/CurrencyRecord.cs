@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
 
 namespace IntegrityVision.Currency
 {
@@ -21,7 +15,7 @@ namespace IntegrityVision.Currency
 
         public override string ToString()
         {
-            return String.Format("{0}/UAH - {1};{2}", Name, Rate, Date);
+            return string.Format("{0}/UAH\t - {1};\t{2}", Name, Rate, Date);
         }
     }
 }

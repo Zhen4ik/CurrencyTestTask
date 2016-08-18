@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
@@ -12,52 +9,47 @@ namespace IntegrityVision.Currency
 {
     public class CurrencyHistory
     {
-        private string endpoint = "http://bank.gov.ua/NBUStatService/v1/statdirectory/exchange";
+        private const string endpoint = "http://bank.gov.ua/NBUStatService/v1/statdirectory/exchange";
         private int _step;
-        public List<CurrencyRecord> records;
-        private DateTime _startPoint = new DateTime(1999, 1, 1);
+        private DateTime _startDate = new DateTime(1999, 1, 1);
 
-        public CurrencyHistory() : this(10) { }
+        public List<CurrencyRecord> Records { get; set; }
 
         public CurrencyHistory(int step)
         {
             _step = step;
-            records = new List<CurrencyRecord>();
+            Records = new List<CurrencyRecord>();
         }
+
         public void GetValues(string curr, bool show)
         {
-            if (records.Count > 0) return;
-            var tempValue = _startPoint;
+            if (Records.Count > 0) return;
+            var tempValue = _startDate;
 
             do
             {
                 var date = tempValue.Year.ToString() + tempValue.Month.ToString("D2") + tempValue.Day.ToString("D2");
                 var newVal = GetValue(curr, date);
-                records.Add(newVal);
-                if (show==true)
+                Records.Add(newVal);
+                if (show)
+                {
                     Console.WriteLine(newVal);
+                }
                 tempValue = tempValue.AddDays(_step);
             } while (tempValue <= DateTime.Now);
         }
 
-        public int GetRecordsCount()
-        {
-            return records.Count;
-        }
-
         private CurrencyRecord GetValue(string valcode, string date)
         {
-            return GetValue(String.Format("valcode={0}&date={1}", valcode, date));
-        }
-
-        private CurrencyRecord GetValue(string parameters)
-        {
-            var request = WebRequest.Create(String.Format("{0}?{1}&json", endpoint, parameters));
+            string parametersString = string.Format("valcode={0}&date={1}", valcode, date);
+            var request = WebRequest.Create(string.Format("{0}?{1}&json", endpoint, parametersString));
             var response = request.GetResponse();
             var stream = response.GetResponseStream();
             string record;
-            using (StreamReader reader = new StreamReader(stream))
+            using (var reader = new StreamReader(stream))
+            {
                 record = reader.ReadToEnd();
+            }
             string result = JArray.Parse(record).First.ToString();
             return JsonConvert.DeserializeObject<CurrencyRecord>(result);
         }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IntegrityVision.Currency
 {
@@ -13,59 +10,42 @@ namespace IntegrityVision.Currency
         {
             get
             {
-                return _history.records[0].Name;
+                return _history.Records[0].Name;
             }
         }
 
-        public Methods(CurrencyHistory histoty)
+        public Methods(CurrencyHistory history)
         {
-            _history = histoty;
+            _history = history;
         }
 
         public CurrencyRecord MinRate()
         {
-            CurrencyRecord minRecord = new CurrencyRecord();
-            minRecord.Rate = 1000;
-            foreach (CurrencyRecord currRec in _history.records)
-            {
-                if (currRec.Rate < minRecord.Rate) minRecord = currRec;
-            }
-            return minRecord;
+            return _history.Records.OrderBy(hr => hr.Rate).First();
         }
 
         public CurrencyRecord MaxRate()
         {
-            CurrencyRecord maxRecord = new CurrencyRecord();
-            maxRecord.Rate = 0;
-            foreach (CurrencyRecord currRec in _history.records)
-            {
-                if (currRec.Rate > maxRecord.Rate) maxRecord = currRec;
-            }
-            return maxRecord;
+            return _history.Records.OrderBy(hr => hr.Rate).Last();
         }
 
-        public double AvarageRate()
+        public double AverageRate()
         {
-            int i = 0;
-            double sum = 0;
-            foreach (CurrencyRecord currRec in _history.records)
-            {
-                sum += currRec.Rate;
-                i++;
-            }
-            return Math.Round(sum / i, 5);
+            return _history.Records.Average(hr => hr.Rate);
         }
 
         public int DaysInAvarage()
         {
             int days = 0;
-            double avargeRate = AvarageRate();
-            double lowAvarageRate = avargeRate * 0.95;
-            double highAvarageRate = avargeRate * 1.05;
-            foreach (CurrencyRecord currRec in _history.records)
+            double avergeRate = AverageRate();
+            double lowAverageRate = avergeRate * 0.95;
+            double highAverageRate = avergeRate * 1.05;
+            foreach (CurrencyRecord currRec in _history.Records)
             {
-                if (currRec.Rate >= lowAvarageRate && currRec.Rate <= highAvarageRate)
+                if (currRec.Rate >= lowAverageRate && currRec.Rate <= highAverageRate)
+                {
                     days++;
+                }
             }
             return days;
         }
@@ -75,7 +55,7 @@ namespace IntegrityVision.Currency
             CurrencyHistory historyEUR = null;
             CurrencyHistory historyUSD = null;
             CurrencyHistory historyCHF = null;
-            if (Curr == "USD" || Curr == "usd")
+            if (Curr.Equals("USD", StringComparison.InvariantCultureIgnoreCase))
             {
                 Console.WriteLine("Wait pls 3 minutes, ty \n");
                 historyUSD = _history;
@@ -85,7 +65,7 @@ namespace IntegrityVision.Currency
                 historyCHF.GetValues("CHF", false);
             }
 
-            if (Curr == "EUR" || Curr == "eur")
+            if (Curr.Equals("EUR", StringComparison.InvariantCultureIgnoreCase))
             {
                 Console.WriteLine("Wait pls 3 minutes, ty \n");
                 historyEUR = _history;
@@ -95,7 +75,7 @@ namespace IntegrityVision.Currency
                 historyCHF.GetValues("CHF", false);
             }
 
-            if (Curr == "CHF" || Curr == "chf")
+            if (Curr.Equals("CHF", StringComparison.InvariantCultureIgnoreCase))
             {
                 Console.WriteLine("Wait pls 3 minutes, ty \n");
                 historyCHF = _history;
@@ -105,12 +85,12 @@ namespace IntegrityVision.Currency
                 historyUSD.GetValues("USD", false);
             }
 
-            for (int i = 1; i < historyEUR.records.Count - 1; i++)
+            for (int i = 1; i < historyEUR.Records.Count - 1; i++)
             {
-                Console.WriteLine(historyEUR.records[i].Date);
-                Console.WriteLine("USD/EUR   {0}  __________  CHF/EUR   {1} \n",
-                    Math.Round(historyUSD.records[i].Rate / historyEUR.records[i].Rate - historyUSD.records[i - 1].Rate / historyEUR.records[i - 1].Rate, 5),
-                    Math.Round(historyCHF.records[i].Rate / historyEUR.records[i].Rate - historyCHF.records[i - 1].Rate / historyEUR.records[i - 1].Rate, 5));
+                Console.WriteLine(historyEUR.Records[i].Date);
+                Console.WriteLine("USD/EUR \t  {0}  __________  CHF/EUR\t   {1} \n",
+                    Math.Round(historyUSD.Records[i].Rate / historyEUR.Records[i].Rate - historyUSD.Records[i - 1].Rate / historyEUR.Records[i - 1].Rate, 5),
+                    Math.Round(historyCHF.Records[i].Rate / historyEUR.Records[i].Rate - historyCHF.Records[i - 1].Rate / historyEUR.Records[i - 1].Rate, 5));
             }
         }
     }

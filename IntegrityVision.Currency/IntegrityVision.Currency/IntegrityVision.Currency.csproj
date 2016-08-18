@@ -49,7 +49,7 @@
   <ItemGroup>
     <Compile Include="Methods.cs" />
     <Compile Include="CurrencyHistory.cs" />
-    <Compile Include="CurrnecyRecord.cs" />
+    <Compile Include="CurrencyRecord.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
