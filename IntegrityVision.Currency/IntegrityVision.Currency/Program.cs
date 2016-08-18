@@ -146,5 +146,4 @@ namespace IntegrityVision.Currency
             }
         }
     }
-
 }

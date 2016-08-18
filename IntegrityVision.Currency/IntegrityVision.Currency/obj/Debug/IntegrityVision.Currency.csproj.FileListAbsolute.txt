@@ -1,8 +1,0 @@
-G:\Projects\IntegrityVision.Currency\IntegrityVision.Currency\IntegrityVision.Currency\bin\Debug\IntegrityVision.Currency.exe.config
-G:\Projects\IntegrityVision.Currency\IntegrityVision.Currency\IntegrityVision.Currency\bin\Debug\IntegrityVision.Currency.exe
-G:\Projects\IntegrityVision.Currency\IntegrityVision.Currency\IntegrityVision.Currency\bin\Debug\IntegrityVision.Currency.pdb
-G:\Projects\IntegrityVision.Currency\IntegrityVision.Currency\IntegrityVision.Currency\bin\Debug\Newtonsoft.Json.dll
-G:\Projects\IntegrityVision.Currency\IntegrityVision.Currency\IntegrityVision.Currency\bin\Debug\Newtonsoft.Json.xml
-G:\Projects\IntegrityVision.Currency\IntegrityVision.Currency\IntegrityVision.Currency\obj\Debug\IntegrityVision.Currency.exe
-G:\Projects\IntegrityVision.Currency\IntegrityVision.Currency\IntegrityVision.Currency\obj\Debug\IntegrityVision.Currency.pdb
-G:\Projects\IntegrityVision.Currency\IntegrityVision.Currency\IntegrityVision.Currency\obj\Debug\IntegrityVision.Currency.csprojResolveAssemblyReference.cache
