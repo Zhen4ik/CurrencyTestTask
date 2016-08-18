@@ -24,8 +24,7 @@ namespace IntegrityVision.Currency
             _step = step;
             records = new List<CurrencyRecord>();
         }
-
-        public void GetValues(string curr)
+        public void GetValues(string curr, bool show)
         {
             if (records.Count > 0) return;
             var tempValue = _startPoint;
@@ -35,7 +34,8 @@ namespace IntegrityVision.Currency
                 var date = tempValue.Year.ToString() + tempValue.Month.ToString("D2") + tempValue.Day.ToString("D2");
                 var newVal = GetValue(curr, date);
                 records.Add(newVal);
-                Console.WriteLine(newVal);
+                if (show==true)
+                    Console.WriteLine(newVal);
                 tempValue = tempValue.AddDays(_step);
             } while (tempValue <= DateTime.Now);
         }
