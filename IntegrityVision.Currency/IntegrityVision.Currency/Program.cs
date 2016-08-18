@@ -109,7 +109,7 @@ namespace IntegrityVision.Currency
             CurrencyHistory historyCHF = null;
             if (curr == "USD" || curr == "usd")
             {
-                Console.WriteLine("Wait pls 2 minutes, ty \n");
+                Console.WriteLine("Wait pls 3 minutes, ty \n");
                 historyUSD = history;
                 historyEUR = new CurrencyHistory(30);
                 historyEUR.GetValues("EUR", false);
@@ -119,7 +119,7 @@ namespace IntegrityVision.Currency
 
             if (curr == "EUR" || curr == "eur")
             {
-                Console.WriteLine("Wait pls 2 minutes, ty \n");
+                Console.WriteLine("Wait pls 3 minutes, ty \n");
                 historyEUR = history;
                 historyUSD = new CurrencyHistory(30);
                 historyUSD.GetValues("USD", false);
@@ -129,7 +129,7 @@ namespace IntegrityVision.Currency
 
             if (curr == "CHF" || curr == "chf")
             {
-                Console.WriteLine("Wait pls 2 minutes, ty \n");
+                Console.WriteLine("Wait pls 3 minutes, ty \n");
                 historyCHF = history;
                 historyEUR = new CurrencyHistory(30);
                 historyEUR.GetValues("EUR", false);
@@ -140,7 +140,7 @@ namespace IntegrityVision.Currency
             for (int i = 1; i<historyEUR.records.Count-1; i++)
             {
                 Console.WriteLine(historyEUR.records[i].Date);
-                Console.WriteLine("USD/EUR   {0} __________ CHF/EUR   {1} \n",                     
+                Console.WriteLine("USD/EUR   {0}  __________  CHF/EUR   {1} \n",                     
                     Math.Round(historyUSD.records[i].Rate / historyEUR.records[i].Rate - historyUSD.records[i - 1].Rate / historyEUR.records[i - 1].Rate, 5),
                     Math.Round(historyCHF.records[i].Rate / historyEUR.records[i].Rate - historyCHF.records[i - 1].Rate / historyEUR.records[i - 1].Rate, 5));
             }
